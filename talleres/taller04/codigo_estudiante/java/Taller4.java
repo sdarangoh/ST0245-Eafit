@@ -10,35 +10,49 @@ package Taller__4;
 public class Taller4 {
     
     
+   /**
+     * This method takes one ArrayList, and uses de method maxEv.
+     * @imput ArrayList<Integger> a
+     * @output int higher value element on a.
+     */
+    public static int arrayMax(int [] a, int b){
+        return maxEv(a, 0, 0);
+    } 
+
     /**
-	* @param array es un arreglo de numeros enteros
-	* @param n la longitud del array anterior 
-	*
-	*en este método se busca hacer la suma de los numeros en un
-	*arreglo de forma recursiva.
-	*
-	* @return la suma
-	*/
-	public static int arrayMax(int[] array, int n) {
-		//...
-	}
-    
-    /**
-	* @param start es un contador, nos sirve para saber cuando debemos parar
-	* @param array es un arreglo de numeros enteros, representan volumen
-	* @param target es la meta, el numero que debe alacanzar la suma 
-	*
-	* en este método se busca hacer la suma de los volumnes posibles
-	* de modo que se acomode de tal forma que se alcance el valor target
-	* pista: la clave esta en el numero de elementos y que no siempre se toman
-	* los elementos, en ocaciones pasan por ejemplo en un conjuntos [5,6,7,8] para un
-	* target 12 se toman el 5 y el 7 pasando por 6 sin cogerlo.
-	*
-	*
-	* @return verdadero si hay una combinación que suponga el valor target, falso de lo contrario
-	*/
-	public static boolean groupSum(int start, int[] nums, int target) {
-        //...
+     * This method is which search the maximum number in the ArrayList
+     * @imput ArrayList<Integger> a, int indice, int maximo.
+     * @output int maximo ass the higher number in the array.
+     */
+    private static int maxEv(int [] a, int indice, int maximo){
+        int newMax = Math.max(a[indice], maximo);
+        if(indice == a.length - 1){
+            return newMax;            
+        }
+        else{
+            return maxEv(a, indice + 1, newMax);
+
+        }
+    }
+
+    public static boolean groupSum(int indice, int [] a, int volumen){
+        return sumAux(a, volumen, indice, volumen);
+    }
+    static int i = 0;
+    private static boolean sumAux(int [] a, int volumen, int indice, int original){        
+        boolean resultado = false;   
+
+        if (volumen - a[indice] == 0){resultado = true; return resultado;}
+        if (volumen < 0){    
+            i = i + 1;
+            return sumAux(a, original, i, original);          
+        }
+        else{
+            if (indice + 1 == a.length){return false;}
+            else{
+                return sumAux(a, volumen - a[indice], indice + 1, original);
+            }
+        }
     }
 	
 	
